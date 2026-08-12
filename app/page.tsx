@@ -712,8 +712,12 @@ export default function HomePage() {
           <div className="grid gap-10 md:grid-cols-3">
             <div>
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-green-700 text-2xl">
-                  🌾
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-lightgreen-700 text-2xl">
+                  <img
+  src="/bharatbhumi-logo.png"
+  alt="BharatBhumi"
+  className="h-12 w-auto object-contain"
+/>
                 </div>
                 <div>
                   <p className="text-xl font-black">
