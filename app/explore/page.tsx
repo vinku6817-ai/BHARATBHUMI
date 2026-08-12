@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { MANDAS_DATA, CROP_TYPES } from '@/lib/constants';
+import { MANDAS_DATA, CROP_TYPES } from '@../../lib/constants";
 import { Manda } from '@/types/index';
 
 export default function ExplorePage() {
