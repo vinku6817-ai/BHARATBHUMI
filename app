@@ -1,0 +1,3 @@
+layout.tsx
+page.tsx
+globals.css
