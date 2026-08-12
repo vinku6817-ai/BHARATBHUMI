@@ -703,12 +703,7 @@ function MandaModal({
                       `Manda ${manda.id} selected. Checkout can be connected next.`
                     );
                   }}
-                  className="mt-4 w-full rounded-xl bg-green-700 <img
-  src="/bharatbhumi-logo.png"
-  alt="BharatBhumi"
-  className="h-12 w-auto object-contain"
-/>
-py-3 font-bold text-white hover:bg-green-800"
+                  className="mt-4 w-full rounded-xl bg-green-700 py-3 font-bold text-white hover:bg-green-800"
                 >
                   Subscribe →
                 </button>
