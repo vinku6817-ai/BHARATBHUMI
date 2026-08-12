@@ -241,7 +241,13 @@ export default function HomePage() {
           <div>
             <strong>🌾 BharatBhumi</strong>
             <p>Your Farm. Your Food. Our Responsibility.</p>
-          </div>
+          <div className="flex items-center">
+  <img
+    src="/bharatbhumi-logo.png"
+    alt="BharatBhumi"
+    className="h-12 w-auto object-contain"
+  />
+</div>
 
           <p>© 2026 BharatBhumi</p>
         </div>
