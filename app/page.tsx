@@ -249,18 +249,3 @@ export default function HomePage() {
     </main>
   );
 }
-<img
-  src="/bharatbhumi-logo.jpg"
-  alt="BharatBhumi"
-  className="w-40 h-auto"
-/>
-<div className="flex items-center">
-  <img
-    src="/bharatbhumi-logo.jpg"
-    alt="BharatBhumi"
-    className="w-16 h-16 object-contain"
-  />
-  <span className="ml-3 text-2xl font-bold text-green-800">
-    BharatBhumi
-  </span>
-</div>
