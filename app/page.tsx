@@ -1,527 +1,246 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 
-type Manda = {
-  id: number;
-  manda_number: string;
-  location: string;
-  crop: string;
-  area_sqm: number;
-  cultivation_cycle_months: number;
-  price_inr: number;
-  status: string;
-  description: string;
-  latitude: number;
-  longitude: number;
-  processedProducts: string[];
-};
-
-const MANDAS: Manda[] = [
-  {
-    id: 1,
-    manda_number: "Manda 01",
-    location: "Rasra, Ballia, Uttar Pradesh",
-    crop: "Wheat",
-    area_sqm: 250,
-    cultivation_cycle_months: 6,
-    price_inr: 5100,
-    status: "available",
-    description:
-      "Organic wheat cultivated by local farmers in Rasra, Ballia with monitored farming practices.",
-    latitude: 25.85,
-    longitude: 83.85,
-    processedProducts: ["Wheat Flour", "Cleaned Wheat", "Atta"],
-  },
-  {
-    id: 2,
-    manda_number: "Manda 02",
-    location: "Rasra, Ballia, Uttar Pradesh",
-    crop: "Rice",
-    area_sqm: 250,
-    cultivation_cycle_months: 6,
-    price_inr: 5100,
-    status: "available",
-    description:
-      "Rice grown locally and delivered as farm produce or processed rice according to your selection.",
-    latitude: 25.85,
-    longitude: 83.86,
-    processedProducts: ["Rice", "Cleaned Rice", "Rice Flour"],
-  },
-  {
-    id: 3,
-    manda_number: "Manda 03",
-    location: "Rasra, Ballia, Uttar Pradesh",
-    crop: "Chana",
-    area_sqm: 250,
-    cultivation_cycle_months: 6,
-    price_inr: 5100,
-    status: "available",
-    description:
-      "Organic chickpea cultivation with options for whole pulses or processed products.",
-    latitude: 25.84,
-    longitude: 83.85,
-    processedProducts: ["Whole Chana", "Chana Dal", "Besan"],
-  },
-  {
-    id: 4,
-    manda_number: "Manda 04",
-    location: "Rasra, Ballia, Uttar Pradesh",
-    crop: "Arhar Dal",
-    area_sqm: 250,
-    cultivation_cycle_months: 6,
-    price_inr: 5100,
-    status: "available",
-    description:
-      "Traditional pulse cultivation focused on quality arhar and dal processing.",
-    latitude: 25.84,
-    longitude: 83.87,
-    processedProducts: ["Whole Arhar", "Arhar Dal", "Cleaned Pulse"],
-  },
-  {
-    id: 5,
-    manda_number: "Manda 05",
-    location: "Rasra, Ballia, Uttar Pradesh",
-    crop: "Moong",
-    area_sqm: 250,
-    cultivation_cycle_months: 6,
-    price_inr: 5100,
-    status: "available",
-    description:
-      "Moong cultivation managed by local farmers with options for cleaned and processed pulses.",
-    latitude: 25.83,
-    longitude: 83.86,
-    processedProducts: ["Whole Moong", "Moong Dal", "Cleaned Moong"],
-  },
-  {
-    id: 6,
-    manda_number: "Manda 06",
-    location: "Rasra, Ballia, Uttar Pradesh",
-    crop: "Masoor",
-    area_sqm: 250,
-    cultivation_cycle_months: 6,
-    price_inr: 5100,
-    status: "available",
-    description:
-      "Masoor cultivation in Rasra with farm-to-consumer processing options.",
-    latitude: 25.83,
-    longitude: 83.85,
-    processedProducts: ["Whole Masoor", "Masoor Dal", "Cleaned Masoor"],
-  },
-];
-
-const CROP_TYPES = ["All Crops", "Wheat", "Rice", "Chana", "Arhar Dal", "Moong", "Masoor"];
-
-const productIcons: Record<string, string> = {
-  "Wheat Flour": "🌾",
-  "Cleaned Wheat": "🌾",
-  Atta: "🥣",
-  Rice: "🍚",
-  "Cleaned Rice": "🍚",
-  "Rice Flour": "🥣",
-  "Whole Chana": "🫘",
-  "Chana Dal": "🫘",
-  Besan: "🥣",
-  "Whole Arhar": "🫘",
-  "Arhar Dal": "🫘",
-  "Cleaned Pulse": "✨",
-  "Whole Moong": "🫘",
-  "Moong Dal": "🫘",
-  "Cleaned Moong": "✨",
-  "Whole Masoor": "🫘",
-  "Masoor Dal": "🫘",
-  "Cleaned Masoor": "✨",
-};
-
-export default function ExplorePage() {
-  const [selectedCrop, setSelectedCrop] = useState("All Crops");
-  const [selectedManda, setSelectedManda] = useState<Manda | null>(null);
-  const [view, setView] = useState<"grid" | "map">("grid");
-
-  const filteredMandas =
-    selectedCrop === "All Crops"
-      ? MANDAS
-      : MANDAS.filter((manda) => manda.crop === selectedCrop);
-
+export default function HomePage() {
   return (
-    <main className="min-h-screen bg-[#f4faf5] text-gray-900">
+    <main className="min-h-screen bg-[#f6faf3] text-gray-900">
 
-      {/* NAVIGATION */}
-      <nav className="sticky top-0 z-50 border-b bg-white/95 shadow-sm backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+      {/* ================= NAVBAR ================= */}
+      <header className="sticky top-0 z-50 border-b border-green-100 bg-white/95 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
 
-          <Link href="/" className="flex items-center">
-            <img
-              src="/bharatbhumi-logo.png"
-              alt="BharatBhumi"
-              className="h-12 w-auto object-contain"
-            />
+          <Link href="/" className="flex items-center gap-3">
+            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-green-700 text-2xl">
+              🌾
+            </div>
+
+            <div>
+              <div className="text-xl font-extrabold text-green-800">
+                BharatBhumi
+              </div>
+
+              <div className="hidden text-xs text-gray-500 sm:block">
+                Your farm. Your food. Our responsibility.
+              </div>
+            </div>
           </Link>
 
-          <div className="flex items-center gap-3">
+          <nav className="flex items-center gap-2 sm:gap-4">
             <Link
-              href="/"
-              className="hidden rounded-lg px-4 py-2 font-medium text-[#14532d] sm:block"
+              href="/explore"
+              className="rounded-lg px-3 py-2 font-semibold text-green-800 hover:bg-green-50 sm:px-4"
             >
-              Home
+              Explore
             </Link>
 
             <Link
               href="/auth/login"
-              className="rounded-lg bg-[#16803c] px-4 py-2 font-semibold text-white"
+              className="rounded-lg bg-green-700 px-4 py-2.5 font-semibold text-white hover:bg-green-800 sm:px-5"
             >
               Login
             </Link>
-          </div>
+          </nav>
 
         </div>
-      </nav>
+      </header>
 
-      {/* HERO */}
-      <section className="bg-gradient-to-br from-[#146c35] via-[#16803c] to-[#55a630] px-5 py-16 text-white">
-        <div className="mx-auto max-w-7xl">
 
-          <p className="mb-3 text-sm font-bold uppercase tracking-[0.2em] text-green-100">
-            BharatBhumi • Rasra, Ballia
-          </p>
+      {/* ================= HERO ================= */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-green-950 via-green-800 to-green-700 text-white">
 
-          <h1 className="max-w-4xl text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
-            Explore Your Manda
-          </h1>
+        {/* Decorative background */}
+        <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-green-500/20 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-32 -left-24 h-80 w-80 rounded-full bg-green-300/10 blur-3xl" />
 
-          <p className="mt-5 max-w-2xl text-lg leading-8 text-green-50">
-            Choose a geo-mapped micro-farm in Rasra, Ballia and select the crop
-            and final form in which you want to receive your farm produce.
-          </p>
+        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2 lg:py-24">
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            <div className="rounded-full bg-white/15 px-5 py-2">
-              📍 Rasra, Ballia
-            </div>
-            <div className="rounded-full bg-white/15 px-5 py-2">
-              🌱 Organic Farming
-            </div>
-            <div className="rounded-full bg-white/15 px-5 py-2">
-              🫘 Pulses & Grains
-            </div>
-          </div>
+          {/* Hero text */}
+          <div>
 
-        </div>
-      </section>
+            <span className="inline-flex rounded-full border border-green-300/30 bg-white/10 px-4 py-2 text-sm font-semibold text-green-100">
+              🌱 Farm-to-consumer agriculture
+            </span>
 
-      {/* LOCATION */}
-      <section className="border-b bg-white">
-        <div className="mx-auto max-w-7xl px-5 py-8 sm:px-6 lg:px-8">
+            <h1 className="mt-6 text-5xl font-black leading-[1.08] tracking-tight sm:text-6xl">
+              Your farm.
+              <br />
+              Your food.
+              <br />
+              <span className="text-green-200">
+                Our responsibility.
+              </span>
+            </h1>
 
-          <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+            <p className="mt-6 max-w-xl text-lg leading-8 text-green-50">
+              Choose your own geo-mapped Manda in Rasra, Ballia.
+              Local farmers cultivate the land while BharatBhumi
+              keeps you connected with your farm and your produce.
+            </p>
 
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-wider text-[#16803c]">
-                Farming Location
-              </p>
+            <div className="mt-8 flex flex-wrap gap-4">
 
-              <h2 className="mt-1 text-2xl font-bold text-gray-900">
-                📍 Rasra, Ballia, Uttar Pradesh
-              </h2>
+              <Link
+                href="/explore"
+                className="rounded-xl bg-white px-6 py-3.5 font-bold text-green-800 shadow-lg transition hover:-translate-y-0.5 hover:bg-green-50"
+              >
+                Explore Mandas →
+              </Link>
 
-              <p className="mt-1 text-gray-600">
-                Local farmers • Geo-mapped Mandas • Farm monitoring
-              </p>
-            </div>
+              <a
+                href="#how-it-works"
+                className="rounded-xl border border-white/40 px-6 py-3.5 font-bold text-white transition hover:bg-white/10"
+              >
+                How It Works
+              </a>
 
-            <div className="rounded-2xl bg-green-50 px-6 py-4 text-center">
-              <p className="text-3xl font-extrabold text-[#16803c]">
-                {MANDAS.length}
-              </p>
-              <p className="text-sm font-medium text-gray-600">
-                Available Mandas
-              </p>
             </div>
 
-          </div>
+            {/* Hero trust points */}
+            <div className="mt-10 flex flex-wrap gap-6 text-sm text-green-100">
 
-        </div>
-      </section>
+              <div className="flex items-center gap-2">
+                <span>✓</span>
+                Geo-mapped farms
+              </div>
 
-      {/* FILTERS */}
-      <section className="sticky top-[73px] z-40 border-b bg-white shadow-sm">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-5 py-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+              <div className="flex items-center gap-2">
+                <span>✓</span>
+                Local farmers
+              </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-
-            <label className="font-semibold text-gray-700">
-              Crop:
-            </label>
-
-            <select
-              value={selectedCrop}
-              onChange={(e) => setSelectedCrop(e.target.value)}
-              className="rounded-xl border border-gray-300 bg-white px-4 py-2.5 font-medium outline-none focus:border-[#16803c]"
-            >
-              {CROP_TYPES.map((crop) => (
-                <option key={crop} value={crop}>
-                  {crop}
-                </option>
-              ))}
-            </select>
-
-          </div>
-
-          <div className="flex items-center gap-2">
-
-            <button
-              onClick={() => setView("grid")}
-              className={`rounded-xl px-4 py-2.5 font-semibold ${
-                view === "grid"
-                  ? "bg-[#16803c] text-white"
-                  : "bg-gray-100 text-gray-700"
-              }`}
-            >
-              ▦ Grid
-            </button>
-
-            <button
-              onClick={() => setView("map")}
-              className={`rounded-xl px-4 py-2.5 font-semibold ${
-                view === "map"
-                  ? "bg-[#16803c] text-white"
-                  : "bg-gray-100 text-gray-700"
-              }`}
-            >
-              📍 Location
-            </button>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* MAIN */}
-      <section className="mx-auto max-w-7xl px-5 py-12 sm:px-6 lg:px-8">
-
-        {view === "map" ? (
-          <div className="mb-10 overflow-hidden rounded-3xl border bg-white shadow-sm">
-
-            <div className="flex min-h-[400px] items-center justify-center bg-gradient-to-br from-green-50 to-emerald-100 p-8">
-
-              <div className="text-center">
-
-                <div className="mx-auto mb-6 flex h-28 w-28 items-center justify-center rounded-full bg-[#16803c] text-6xl shadow-xl">
-                  📍
-                </div>
-
-                <h2 className="text-3xl font-bold text-[#14532d]">
-                  Rasra, Ballia
-                </h2>
-
-                <p className="mt-3 text-gray-600">
-                  BharatBhumi Manda farming zone
-                </p>
-
-                <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-
-                  <div className="rounded-xl bg-white p-4 shadow-sm">
-                    <p className="text-2xl font-bold text-[#16803c]">
-                      {filteredMandas.length}
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      Mandas
-                    </p>
-                  </div>
-
-                  <div className="rounded-xl bg-white p-4 shadow-sm">
-                    <p className="text-2xl font-bold text-[#16803c]">
-                      250
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      sq.m / Manda
-                    </p>
-                  </div>
-
-                  <div className="rounded-xl bg-white p-4 shadow-sm">
-                    <p className="text-2xl font-bold text-[#16803c]">
-                      6
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      Months
-                    </p>
-                  </div>
-
-                  <div className="rounded-xl bg-white p-4 shadow-sm">
-                    <p className="text-2xl font-bold text-[#16803c]">
-                      ₹5,100
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      Subscription
-                    </p>
-                  </div>
-
-                </div>
-
+              <div className="flex items-center gap-2">
+                <span>✓</span>
+                Digital inventory
               </div>
 
             </div>
 
           </div>
-        ) : null}
 
-        {/* TITLE */}
-        <div className="mb-8">
 
-          <p className="font-semibold text-[#16803c]">
-            AVAILABLE FARMS
-          </p>
+          {/* Hero farm card */}
+          <div className="relative">
 
-          <h2 className="mt-1 text-3xl font-extrabold text-gray-900">
-            Choose Your Manda
-          </h2>
+            <div className="rounded-3xl bg-white p-4 shadow-2xl sm:p-6">
 
-          <p className="mt-2 text-gray-600">
-            {filteredMandas.length} Manda
-            {filteredMandas.length !== 1 ? "s" : ""} available in Rasra,
-            Ballia
-          </p>
+              <div className="rounded-2xl bg-green-50 p-5 sm:p-6">
 
-        </div>
-
-        {/* CARDS */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-
-          {filteredMandas.map((manda) => (
-
-            <article
-              key={manda.id}
-              className="overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl"
-            >
-
-              {/* CARD HEADER */}
-              <div className="bg-gradient-to-br from-[#146c35] to-[#55a630] p-5 text-white">
-
-                <div className="flex items-start justify-between gap-3">
+                <div className="flex items-start justify-between">
 
                   <div>
-                    <p className="text-sm font-medium text-green-100">
-                      Geo-mapped micro-farm
+                    <p className="text-xs font-bold uppercase tracking-widest text-green-700">
+                      Geo-mapped Manda
                     </p>
 
-                    <h3 className="mt-1 text-2xl font-extrabold">
-                      {manda.manda_number}
-                    </h3>
+                    <h2 className="mt-1 text-3xl font-black text-gray-900">
+                      Manda 01
+                    </h2>
                   </div>
 
-                  <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-bold">
-                    Available
+                  <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-bold text-green-800">
+                    AVAILABLE
                   </span>
 
                 </div>
 
-                <p className="mt-4 text-sm text-green-50">
-                  📍 {manda.location}
-                </p>
 
-              </div>
+                {/* Farm grid */}
+                <div className="mt-6 rounded-2xl border border-green-100 bg-white p-4">
 
-              {/* CARD BODY */}
-              <div className="p-5">
+                  <div className="mb-3 flex items-center justify-between">
+                    <span className="text-sm font-bold text-gray-700">
+                      Farm Layout
+                    </span>
 
-                <div className="mb-5 flex items-center gap-4">
-
-                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-green-50 text-4xl">
-                    {manda.crop === "Wheat" && "🌾"}
-                    {manda.crop === "Rice" && "🌾"}
-                    {manda.crop === "Chana" && "🫘"}
-                    {manda.crop === "Arhar Dal" && "🫘"}
-                    {manda.crop === "Moong" && "🫘"}
-                    {manda.crop === "Masoor" && "🫘"}
+                    <span className="text-xs text-gray-500">
+                      Rasra, Ballia
+                    </span>
                   </div>
 
-                  <div>
-                    <p className="text-xs font-semibold uppercase text-gray-500">
-                      Crop
-                    </p>
+                  <div className="grid grid-cols-4 gap-2">
 
-                    <p className="text-xl font-bold text-[#16803c]">
-                      {manda.crop}
-                    </p>
-                  </div>
-
-                </div>
-
-                <div className="grid grid-cols-2 gap-3">
-
-                  <div className="rounded-xl bg-gray-50 p-3">
-                    <p className="text-xs text-gray-500">
-                      Area
-                    </p>
-                    <p className="font-bold">
-                      {manda.area_sqm} sq.m
-                    </p>
-                  </div>
-
-                  <div className="rounded-xl bg-gray-50 p-3">
-                    <p className="text-xs text-gray-500">
-                      Cycle
-                    </p>
-                    <p className="font-bold">
-                      {manda.cultivation_cycle_months} months
-                    </p>
-                  </div>
-
-                </div>
-
-                <p className="mt-5 text-sm leading-6 text-gray-600">
-                  {manda.description}
-                </p>
-
-                {/* PROCESSED PRODUCTS PREVIEW */}
-                <div className="mt-5">
-
-                  <p className="mb-3 text-sm font-bold text-gray-900">
-                    🌾 Choose processed yield
-                  </p>
-
-                  <div className="flex flex-wrap gap-2">
-
-                    {manda.processedProducts.slice(0, 3).map((product) => (
-
-                      <span
-                        key={product}
-                        className="rounded-full border border-green-100 bg-green-50 px-3 py-1.5 text-xs font-medium text-[#14532d]"
+                    {[
+                      "M01",
+                      "M02",
+                      "M03",
+                      "M04",
+                      "M05",
+                      "M06",
+                      "M07",
+                      "M08",
+                      "M09",
+                      "M10",
+                      "M11",
+                      "M12",
+                      "M13",
+                      "M14",
+                      "M15",
+                      "M16",
+                    ].map((item, index) => (
+                      <div
+                        key={item}
+                        className={`flex aspect-square items-center justify-center rounded-lg text-xs font-bold ${
+                          index === 0
+                            ? "bg-green-700 text-white"
+                            : "bg-green-50 text-green-700"
+                        }`}
                       >
-                        {productIcons[product] || "🌱"} {product}
-                      </span>
-
+                        {item}
+                      </div>
                     ))}
 
                   </div>
 
                 </div>
 
-                <div className="mt-6 border-t pt-5">
 
-                  <div className="flex items-end justify-between gap-3">
+                <div className="mt-5 grid grid-cols-2 gap-4">
+
+                  <div>
+                    <p className="text-xs text-gray-500">
+                      Location
+                    </p>
+
+                    <p className="mt-1 font-bold text-gray-900">
+                      📍 Rasra, Ballia
+                    </p>
+                  </div>
+
+                  <div>
+                    <p className="text-xs text-gray-500">
+                      Area
+                    </p>
+
+                    <p className="mt-1 font-bold text-gray-900">
+                      ~250 sq. m.
+                    </p>
+                  </div>
+
+                </div>
+
+
+                <div className="mt-5 border-t border-green-100 pt-5">
+
+                  <div className="flex items-end justify-between">
 
                     <div>
                       <p className="text-xs text-gray-500">
                         Subscription
                       </p>
 
-                      <p className="text-2xl font-extrabold text-[#16803c]">
-                        ₹{manda.price_inr.toLocaleString("en-IN")}
+                      <p className="text-3xl font-black text-green-700">
+                        ₹5,100
                       </p>
 
                       <p className="text-xs text-gray-500">
-                        for {manda.cultivation_cycle_months} months
+                        6-month cultivation cycle
                       </p>
                     </div>
 
-                    <button
-                      onClick={() => setSelectedManda(manda)}
-                      className="rounded-xl bg-[#16803c] px-5 py-3 font-bold text-white transition hover:bg-[#11652f]"
-                    >
-                      View Details
-                    </button>
+                    <div className="text-5xl">
+                      🌾
+                    </div>
 
                   </div>
 
@@ -529,78 +248,427 @@ export default function ExplorePage() {
 
               </div>
 
-            </article>
+            </div>
 
-          ))}
+          </div>
+
+        </div>
+      </section>
+
+
+      {/* ================= QUICK FEATURES ================= */}
+      <section className="border-b border-gray-100 bg-white">
+
+        <div className="mx-auto grid max-w-7xl gap-6 px-5 py-8 sm:px-8 md:grid-cols-3">
+
+          <Feature
+            icon="📍"
+            title="Geo-mapped farms"
+            description="Know exactly where your Manda is located."
+          />
+
+          <Feature
+            icon="👨‍🌾"
+            title="Local farmers"
+            description="Farmers manage cultivation at the local level."
+          />
+
+          <Feature
+            icon="📦"
+            title="Flexible inventory"
+            description="Order only the amount of produce you need."
+          />
 
         </div>
 
       </section>
 
-      {/* PROCESSING SECTION */}
-      <section className="bg-white px-5 py-16 sm:px-6 lg:px-8">
 
-        <div className="mx-auto max-w-7xl">
+      {/* ================= ABOUT ================= */}
+      <section className="bg-[#f6faf3] py-20">
 
-          <div className="max-w-2xl">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2">
 
-            <p className="font-bold uppercase tracking-wider text-[#16803c]">
-              FROM FARM TO TABLE
+          <div>
+
+            <p className="font-bold uppercase tracking-widest text-green-700">
+              BharatBhumi
             </p>
 
-            <h2 className="mt-2 text-3xl font-extrabold sm:text-4xl">
-              Choose how you receive your yield
+            <h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">
+              Bring your farm closer to your home.
             </h2>
 
+            <p className="mt-6 text-lg leading-8 text-gray-600">
+              BharatBhumi connects consumers with small,
+              geo-mapped farm plots called Mandas.
+            </p>
+
             <p className="mt-4 leading-7 text-gray-600">
-              BharatBhumi can offer the harvested produce in its natural form
-              or as selected processed products such as flour, rice and dal.
+              You select your Manda and crop. Local farmers
+              cultivate it. After harvesting, the produce is
+              recorded in your digital inventory so you can
+              use it according to your requirements.
             </p>
 
           </div>
+
+
+          <div className="grid gap-5 sm:grid-cols-2">
+
+            <InfoCard
+              icon="🌱"
+              title="Choose"
+              text="Select your Manda and preferred crop."
+            />
+
+            <InfoCard
+              icon="👨‍🌾"
+              title="Cultivate"
+              text="Local farmers take care of the farming."
+            />
+
+            <InfoCard
+              icon="🌾"
+              title="Harvest"
+              text="Your harvested produce is recorded."
+            />
+
+            <InfoCard
+              icon="📦"
+              title="Use"
+              text="Order only what you need from your inventory."
+            />
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      {/* ================= HOW IT WORKS ================= */}
+      <section
+        id="how-it-works"
+        className="bg-white py-20"
+      >
+
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+
+          <div className="mx-auto max-w-3xl text-center">
+
+            <p className="font-bold uppercase tracking-widest text-green-700">
+              How It Works
+            </p>
+
+            <h2 className="mt-3 text-4xl font-black sm:text-5xl">
+              From Manda to your kitchen.
+            </h2>
+
+            <p className="mt-5 text-lg leading-8 text-gray-600">
+              A simple and transparent journey from choosing
+              your farm to receiving your produce.
+            </p>
+
+          </div>
+
+
+          {/* Steps */}
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+
+            <Step
+              number="01"
+              icon="📍"
+              title="Choose your Manda"
+              text="Select a geo-mapped Manda in Rasra, Ballia."
+            />
+
+            <Step
+              number="02"
+              icon="🌱"
+              title="Select your crop"
+              text="Choose from available grains and pulse crops."
+            />
+
+            <Step
+              number="03"
+              icon="👨‍🌾"
+              title="Farmer cultivates"
+              text="A local farmer manages cultivation and harvesting."
+            />
+
+            <Step
+              number="04"
+              icon="🌾"
+              title="Harvest"
+              text="Your harvested produce is added to your inventory."
+            />
+
+          </div>
+
+
+          {/* ================= INVENTORY ================= */}
+          <div className="mt-10 overflow-hidden rounded-3xl border border-green-100 bg-green-50">
+
+            <div className="grid lg:grid-cols-2">
+
+              {/* Explanation */}
+              <div className="p-7 sm:p-10">
+
+                <span className="inline-flex rounded-full bg-green-100 px-4 py-2 text-sm font-bold text-green-800">
+                  📦 Inventory Model
+                </span>
+
+                <h3 className="mt-5 text-3xl font-black sm:text-4xl">
+                  Take only what you need.
+                </h3>
+
+                <p className="mt-5 leading-7 text-gray-600">
+                  Once your crop is harvested, the complete
+                  quantity is added to your digital BharatBhumi
+                  inventory.
+                </p>
+
+                <p className="mt-4 leading-7 text-gray-600">
+                  You don't have to order your entire harvest.
+                  Whenever you need produce, simply order the
+                  quantity you require.
+                </p>
+
+                <p className="mt-4 leading-7 text-gray-600">
+                  After every order, your remaining inventory is
+                  automatically updated.
+                </p>
+
+              </div>
+
+
+              {/* Example */}
+              <div className="bg-white p-7 sm:p-10">
+
+                <p className="text-sm font-bold uppercase tracking-widest text-green-700">
+                  Example
+                </p>
+
+                <div className="mt-5 rounded-2xl border border-gray-100 p-5 shadow-sm">
+
+                  <div className="flex items-center justify-between">
+
+                    <div>
+                      <p className="text-sm text-gray-500">
+                        Harvested
+                      </p>
+
+                      <p className="text-4xl font-black">
+                        100 kg
+                      </p>
+
+                      <p className="mt-1 text-sm text-gray-500">
+                        🌾 Wheat
+                      </p>
+                    </div>
+
+                    <span className="text-5xl">
+                      📦
+                    </span>
+
+                  </div>
+
+
+                  <div className="my-6 h-px bg-gray-200" />
+
+
+                  <div className="flex items-center justify-between">
+
+                    <div>
+                      <p className="text-sm text-gray-500">
+                        Your order
+                      </p>
+
+                      <p className="text-3xl font-black text-green-700">
+                        15 kg
+                      </p>
+                    </div>
+
+                    <div className="text-3xl">
+                      🛒
+                    </div>
+
+                  </div>
+
+
+                  <div className="mt-5 h-4 overflow-hidden rounded-full bg-gray-200">
+
+                    <div
+                      className="h-full rounded-full bg-green-600"
+                      style={{ width: "15%" }}
+                    />
+
+                  </div>
+
+
+                  <div className="mt-2 flex justify-between text-xs text-gray-500">
+                    <span>15 kg used</span>
+                    <span>85 kg remaining</span>
+                  </div>
+
+
+                  <div className="mt-6 rounded-xl bg-green-50 p-4">
+
+                    <div className="flex items-center justify-between">
+
+                      <div>
+                        <p className="text-xs text-gray-500">
+                          Updated inventory
+                        </p>
+
+                        <p className="text-2xl font-black text-green-700">
+                          85 kg
+                        </p>
+                      </div>
+
+                      <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-bold text-green-800">
+                        UPDATED ✓
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      {/* ================= PROCESSED YIELD ================= */}
+      <section className="bg-[#f6faf3] py-20">
+
+        <div className="mx-auto max-w-7xl px-5 sm:px-8">
+
+          <div className="max-w-3xl">
+
+            <p className="font-bold uppercase tracking-widest text-green-700">
+              Processed Yield
+            </p>
+
+            <h2 className="mt-3 text-4xl font-black sm:text-5xl">
+              Your produce, your choice.
+            </h2>
+
+            <p className="mt-5 text-lg leading-8 text-gray-600">
+              Where processing is available, choose the form
+              in which you want your produce.
+            </p>
+
+          </div>
+
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
 
-            <div className="rounded-3xl border bg-[#f8fcf8] p-6">
-              <div className="text-5xl">🌾</div>
-              <h3 className="mt-4 text-xl font-bold">
-                Farm Produce
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-gray-600">
-                Receive cleaned grain or pulse directly from your selected
-                Manda.
+            <ProcessCard
+              icon="🌾"
+              title="Wheat → Flour"
+              text="Choose wheat grain or processed flour / atta."
+            />
+
+            <ProcessCard
+              icon="🍚"
+              title="Paddy → Rice"
+              text="Choose processed rice for household use."
+            />
+
+            <ProcessCard
+              icon="🫘"
+              title="Pulses → Dal"
+              text="Choose cleaned or processed pulses where available."
+            />
+
+            <ProcessCard
+              icon="📦"
+              title="Flexible quantity"
+              text="Order only the quantity you currently need."
+            />
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      {/* ================= LOCATION ================= */}
+      <section className="bg-white py-20">
+
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2">
+
+          <div>
+
+            <p className="font-bold uppercase tracking-widest text-green-700">
+              Our Farming Location
+            </p>
+
+            <h2 className="mt-3 text-4xl font-black sm:text-5xl">
+              Starting from Rasra, Ballia.
+            </h2>
+
+            <p className="mt-5 text-lg leading-8 text-gray-600">
+              BharatBhumi begins with a focus on connecting
+              consumers with farmland in Rasra, Ballia,
+              Uttar Pradesh.
+            </p>
+
+            <div className="mt-7 rounded-2xl bg-green-50 p-5">
+
+              <p className="text-sm text-gray-500">
+                Current location
               </p>
+
+              <p className="mt-1 text-xl font-black text-green-800">
+                📍 Rasra, Ballia, Uttar Pradesh
+              </p>
+
             </div>
 
-            <div className="rounded-3xl border bg-[#f8fcf8] p-6">
-              <div className="text-5xl">🥣</div>
-              <h3 className="mt-4 text-xl font-bold">
-                Flour
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-gray-600">
-                Wheat can be processed into atta or flour before delivery.
-              </p>
-            </div>
+          </div>
 
-            <div className="rounded-3xl border bg-[#f8fcf8] p-6">
-              <div className="text-5xl">🍚</div>
-              <h3 className="mt-4 text-xl font-bold">
-                Rice
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-gray-600">
-                Rice can be cleaned and prepared for convenient household use.
-              </p>
-            </div>
 
-            <div className="rounded-3xl border bg-[#f8fcf8] p-6">
-              <div className="text-5xl">🫘</div>
-              <h3 className="mt-4 text-xl font-bold">
-                Processed Pulses
-              </h3>
-              <p className="mt-2 text-sm leading-6 text-gray-600">
-                Chana, arhar, moong and masoor can be supplied as cleaned
-                pulses or dal.
-              </p>
+          {/* Location visual */}
+          <div className="rounded-3xl bg-green-900 p-5 shadow-xl">
+
+            <div className="rounded-2xl bg-green-800 p-8 text-white">
+
+              <div className="flex min-h-[280px] items-center justify-center">
+
+                <div className="text-center">
+
+                  <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-white/10 text-5xl">
+                    📍
+                  </div>
+
+                  <h3 className="mt-6 text-3xl font-black">
+                    Rasra
+                  </h3>
+
+                  <p className="mt-2 text-green-200">
+                    Ballia, Uttar Pradesh
+                  </p>
+
+                  <div className="mt-6 inline-flex rounded-full bg-green-700 px-5 py-2 text-sm font-bold">
+                    BharatBhumi Farming Zone
+                  </div>
+
+                </div>
+
+              </div>
+
             </div>
 
           </div>
@@ -609,201 +677,208 @@ export default function ExplorePage() {
 
       </section>
 
-      {/* MODAL */}
-      {selectedManda && (
 
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4"
-          onClick={() => setSelectedManda(null)}
-        >
+      {/* ================= CTA ================= */}
+      <section className="bg-green-800 px-5 py-20 text-white">
 
-          <div
-            className="max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white shadow-2xl"
-            onClick={(event) => event.stopPropagation()}
+        <div className="mx-auto max-w-4xl text-center">
+
+          <div className="text-5xl">
+            🌾
+          </div>
+
+          <h2 className="mt-5 text-4xl font-black sm:text-5xl">
+            Ready to choose your Manda?
+          </h2>
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-green-100">
+            Explore available Mandas in Rasra, Ballia and
+            start your farm-to-food journey.
+          </p>
+          <Link
+            href="/explore"
+            className="mt-8 inline-flex rounded-xl bg-white px-7 py-3.5 font-bold text-green-800 shadow-lg hover:bg-green-50"
           >
-
-            {/* MODAL HEADER */}
-            <div className="bg-gradient-to-br from-[#146c35] to-[#55a630] p-6 text-white">
-
-              <div className="flex items-start justify-between gap-4">
-
+            Explore Available Mandas →
+          </Link>
+        </div>
+      </section>
+      {/* ================= FOOTER ================= */}
+      <footer className="bg-gray-950 px-5 py-10 text-white">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 md:grid-cols-3">
+            <div>
+              <div className="flex items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-green-700 text-2xl">
+                  🌾
+                </div>
                 <div>
-                  <p className="text-sm text-green-100">
-                    BharatBhumi Manda
+                  <p className="text-xl font-black">
+                    BharatBhumi
                   </p>
-
-                  <h2 className="mt-1 text-3xl font-extrabold">
-                    {selectedManda.manda_number}
-                  </h2>
-
-                  <p className="mt-2 text-sm text-green-50">
-                    📍 {selectedManda.location}
+                  <p className="text-xs text-gray-400">
+                    Your farm. Your food.
                   </p>
                 </div>
-
-                <button
-                  onClick={() => setSelectedManda(null)}
-className="rounded-full bg-white/20 px-3 py-2 text-xl"
-                >
-                  ×
-                </button>
-              </div>
-            </div>
-            {/* MODAL CONTENT */}
-            <div className="space-y-7 p-6">
-              {/* BASIC INFO */}
-              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                <div className="rounded-2xl bg-green-50 p-4">
-                  <p className="text-xs text-gray-500">
-                    Crop
-                  </p>
-                  <p className="mt-1 font-bold text-[#16803c]">
-                    {selectedManda.crop}
-                  </p>
-                </div>
-                <div className="rounded-2xl bg-green-50 p-4">
-                  <p className="text-xs text-gray-500">
-                    Area
-                  </p>
-                  <p className="mt-1 font-bold text-[#16803c]">
-                    {selectedManda.area_sqm} sq.m
-                  </p>
-                </div>
-                <div className="rounded-2xl bg-green-50 p-4">
-                  <p className="text-xs text-gray-500">
-                    Cycle
-                  </p>
-                  <p className="mt-1 font-bold text-[#16803c]">
-                    {selectedManda.cultivation_cycle_months} months
-                  </p>
-                </div>
-                <div className="rounded-2xl bg-green-50 p-4">
-                  <p className="text-xs text-gray-500">
-                    Status
-                  </p>
-                  <p className="mt-1 font-bold capitalize text-[#16803c]">
-                    {selectedManda.status}
-                  </p>
-                </div>
-              </div>
-              {/* DESCRIPTION */}
-              <div>
-                <h3 className="text-xl font-bold text-gray-900">
-                  About this Manda
-                </h3>
-                <p className="mt-2 leading-7 text-gray-600">
-                  {selectedManda.description}
-                </p>
-              </div>
-              {/* PROCESSED YIELD */}
-              <div>
-                <h3 className="text-xl font-bold text-gray-900">
-                  Select your yield format
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">
-                  Available processing options for this crop
-                </p>
-                <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                  {selectedManda.processedProducts.map((product) => (
-                    <button
-                      key={product}
-                      className="rounded-2xl border-2 border-gray-100 bg-white p-4 text-left transition hover:border-[#16803c] hover:bg-green-50"
-                    >
-                      <div className="text-4xl">
-                        {productIcons[product] || "🌱"}
-                      </div>
-                      <p className="mt-3 font-bold text-gray-900">
-                        {product}
-                      </p>
-                      <p className="mt-1 text-xs text-gray-500">
-                        Processed yield option
-                      </p>
-                    </button>
-                  ))}
-                </div>
-              </div>
-              {/* LOCATION */}
-              <div className="rounded-2xl bg-gray-50 p-5">
-                <h3 className="font-bold text-gray-900">
-                  📍 Geo-location
-                </h3>
-                <p className="mt-2 text-sm text-gray-600">
-                  Rasra, Ballia, Uttar Pradesh
-                </p>
-                <div className="mt-3 grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-xs text-gray-500">
-                      Latitude
-                    </p>
-                    <p className="font-mono font-semibold">
-                      {selectedManda.latitude}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-xs text-gray-500">
-                      Longitude
-                    </p>
-                    <p className="font-mono font-semibold">
-                      {selectedManda.longitude}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              {/* PRICE */}
-              <div className="rounded-2xl bg-green-50 p-5">
-                <p className="text-sm text-gray-600">
-                  Manda subscription
-                </p>
-                <div className="mt-1 flex items-end justify-between gap-4">
-                  <div>
-                    <p className="text-4xl font-extrabold text-[#16803c]">
-                      ₹{selectedManda.price_inr.toLocaleString("en-IN")}
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      {selectedManda.cultivation_cycle_months}-month cycle
-                    </p>
-                  </div>
-                  <span className="rounded-full bg-green-200 px-3 py-1 text-xs font-bold text-green-900">
-                    Available
-                  </span>
-                </div>
-              </div>
-            </div>
-            {/* MODAL FOOTER */}
-            <div className="sticky bottom-0 flex gap-3 border-t bg-white p-5">
-              <button
-                onClick={() => setSelectedManda(null)}
-                className="flex-1 rounded-xl border-2 border-[#16803c] px-5 py-3 font-bold text-[#16803c]"
-              >
-                Close
-              </button>
-              <Link
-                href={`/checkout?manda=${selectedManda.id}`}
-                className="flex-1 rounded-xl bg-[#16803c] px-5 py-3 text-center font-bold text-white"
-              >
-                Subscribe Now
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
-      {/* FOOTER */}
-      <footer className="bg-[#10251a] px-5 py-10 text-white">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
-          <div>
-            <p className="text-xl font-bold">
-              🌾 BharatBhumi
-            </p>
-            <p className="mt-1 text-sm text-gray-300">
-              Connecting people, farmland and food.
-            </p>
-          </div>
-          <p className="text-sm text-gray-400">
-            © 2026 BharatBhumi
-          </p>
-        </div>
-      </footer>
-    </main>
-  );
+              </div>
+              <p className="mt-5 max-w-sm text-sm leading-6 text-gray-400">
+                Connecting people, farmland, farmers and food
+                through a transparent farm-to-consumer system.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-bold">
+                Quick Links
+              </h3>
+              <div className="mt-4 space-y-3 text-sm text-gray-400">
+                <Link
+                  href="/"
+                  className="block hover:text-white"
+                >
+                  Home
+                </Link>
+                <Link
+                  href="/explore"
+                  className="block hover:text-white"
+                >
+                  Explore Mandas
+                </Link>
+                <a
+                  href="#how-it-works"
+                  className="block hover:text-white"
+                >
+                  How It Works
+                </a>
+                <Link
+                  href="/auth/login"
+                  className="block hover:text-white"
+                >
+                  Login
+                </Link>
+              </div>
+            </div>
+            <div>
+              <h3 className="font-bold">
+                BharatBhumi
+              </h3>
+              <p className="mt-4 text-sm leading-6 text-gray-400">
+                📍 Rasra, Ballia
+                <br />
+                Uttar Pradesh, India
+              </p>
+              <p className="mt-5 text-sm font-semibold text-green-300">
+                Your farm. Your food. Our responsibility.
+              </p>
+            </div>
+          </div>
+          <div className="mt-10 border-t border-white/10 pt-6 text-center text-sm text-gray-500">
+            © 2026 BharatBhumi. All rights reserved.
+          </div>
+        </div>
+      </footer>
+    </main>
+  );
 }
-     
+/* =========================================================
+   SMALL REUSABLE COMPONENTS
+   ========================================================= */
+function Feature({
+  icon,
+  title,
+  description,
+}: {
+  icon: string;
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="flex items-center gap-4">
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-green-100 text-2xl">
+        {icon}
+      </div>
+      <div>
+        <p className="font-bold text-gray-900">
+          {title}
+        </p>
+        <p className="text-sm text-gray-500">
+          {description}
+        </p>
+      </div>
+    </div>
+  );
+}
+function InfoCard({
+  icon,
+  title,
+  text,
+}: {
+  icon: string;
+  title: string;
+  text: string;
+}) {
+  return (
+    <div className="rounded-2xl bg-white p-6 shadow-sm">
+      <div className="text-4xl">
+        {icon}
+      </div>
+      <h3 className="mt-4 text-xl font-bold">
+        {title}
+      </h3>
+      <p className="mt-2 text-sm leading-6 text-gray-600">
+        {text}
+      </p>
+    </div>
+  );
+}
+function Step({
+  number,
+  icon,
+  title,
+  text,
+}: {
+  number: string;
+  icon: string;
+  title: string;
+  text: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
+      <div className="flex items-center justify-between">
+        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-100 text-2xl">
+          {icon}
+        </div>
+        <span className="text-sm font-black text-green-700">
+          {number}
+        </span>
+      </div>
+      <h3 className="mt-5 text-xl font-bold">
+        {title}
+      </h3>
+      <p className="mt-3 text-sm leading-6 text-gray-600">
+        {text}
+      </p>
+    </div>
+  );
+}
+function ProcessCard({
+  icon,
+  title,
+  text,
+}: {
+  icon: string;
+  title: string;
+  text: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+      <div className="text-5xl">
+        {icon}
+      </div>
+      <h3 className="mt-5 text-xl font-bold">
+        {title}
+      </h3>
+      <p className="mt-2 text-sm leading-6 text-gray-600">
+        {text}
+      </p>
+    </div>
+  );
+}
