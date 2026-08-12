@@ -11,7 +11,7 @@ export default function HomePage() {
         <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
 
           <Link href="/" className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-green-700 text-2xl">
+            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white-700 text-2xl">
               <img
   src="/bharatbhumi-logo.png"
   alt="BharatBhumi"
