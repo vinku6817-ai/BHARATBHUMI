@@ -643,6 +643,167 @@ export default function ExplorePage() {
 
                 <button
                   onClick={() => setSelectedManda(null)}
+className="rounded-full bg-white/20 px-3 py-2 text-xl"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+            {/* MODAL CONTENT */}
+            <div className="space-y-7 p-6">
+              {/* BASIC INFO */}
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <div className="rounded-2xl bg-green-50 p-4">
+                  <p className="text-xs text-gray-500">
+                    Crop
+                  </p>
+                  <p className="mt-1 font-bold text-[#16803c]">
+                    {selectedManda.crop}
+                  </p>
+                </div>
+                <div className="rounded-2xl bg-green-50 p-4">
+                  <p className="text-xs text-gray-500">
+                    Area
+                  </p>
+                  <p className="mt-1 font-bold text-[#16803c]">
+                    {selectedManda.area_sqm} sq.m
+                  </p>
+                </div>
+                <div className="rounded-2xl bg-green-50 p-4">
+                  <p className="text-xs text-gray-500">
+                    Cycle
+                  </p>
+                  <p className="mt-1 font-bold text-[#16803c]">
+                    {selectedManda.cultivation_cycle_months} months
+                  </p>
+                </div>
+                <div className="rounded-2xl bg-green-50 p-4">
+                  <p className="text-xs text-gray-500">
+                    Status
+                  </p>
+                  <p className="mt-1 font-bold capitalize text-[#16803c]">
+                    {selectedManda.status}
+                  </p>
+                </div>
+              </div>
+              {/* DESCRIPTION */}
+              <div>
+                <h3 className="text-xl font-bold text-gray-900">
+                  About this Manda
+                </h3>
+                <p className="mt-2 leading-7 text-gray-600">
+                  {selectedManda.description}
+                </p>
+              </div>
+              {/* PROCESSED YIELD */}
+              <div>
+                <h3 className="text-xl font-bold text-gray-900">
+                  Select your yield format
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">
+                  Available processing options for this crop
+                </p>
+                <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                  {selectedManda.processedProducts.map((product) => (
+                    <button
+                      key={product}
+                      className="rounded-2xl border-2 border-gray-100 bg-white p-4 text-left transition hover:border-[#16803c] hover:bg-green-50"
+                    >
+                      <div className="text-4xl">
+                        {productIcons[product] || "🌱"}
+                      </div>
+                      <p className="mt-3 font-bold text-gray-900">
+                        {product}
+                      </p>
+                      <p className="mt-1 text-xs text-gray-500">
+                        Processed yield option
+                      </p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+              {/* LOCATION */}
+              <div className="rounded-2xl bg-gray-50 p-5">
+                <h3 className="font-bold text-gray-900">
+                  📍 Geo-location
+                </h3>
+                <p className="mt-2 text-sm text-gray-600">
+                  Rasra, Ballia, Uttar Pradesh
+                </p>
+                <div className="mt-3 grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-xs text-gray-500">
+                      Latitude
+                    </p>
+                    <p className="font-mono font-semibold">
+                      {selectedManda.latitude}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-500">
+                      Longitude
+                    </p>
+                    <p className="font-mono font-semibold">
+                      {selectedManda.longitude}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* PRICE */}
+              <div className="rounded-2xl bg-green-50 p-5">
+                <p className="text-sm text-gray-600">
+                  Manda subscription
+                </p>
+                <div className="mt-1 flex items-end justify-between gap-4">
+                  <div>
+                    <p className="text-4xl font-extrabold text-[#16803c]">
+                      ₹{selectedManda.price_inr.toLocaleString("en-IN")}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      {selectedManda.cultivation_cycle_months}-month cycle
+                    </p>
+                  </div>
+                  <span className="rounded-full bg-green-200 px-3 py-1 text-xs font-bold text-green-900">
+                    Available
+                  </span>
+                </div>
+              </div>
+            </div>
+            {/* MODAL FOOTER */}
+            <div className="sticky bottom-0 flex gap-3 border-t bg-white p-5">
+              <button
+                onClick={() => setSelectedManda(null)}
+                className="flex-1 rounded-xl border-2 border-[#16803c] px-5 py-3 font-bold text-[#16803c]"
+              >
+                Close
+              </button>
+              <Link
+                href={`/checkout?manda=${selectedManda.id}`}
+                className="flex-1 rounded-xl bg-[#16803c] px-5 py-3 text-center font-bold text-white"
+              >
+                Subscribe Now
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* FOOTER */}
+      <footer className="bg-[#10251a] px-5 py-10 text-white">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
+          <div>
+            <p className="text-xl font-bold">
+              🌾 BharatBhumi
+            </p>
+            <p className="mt-1 text-sm text-gray-300">
+              Connecting people, farmland and food.
+            </p>
+          </div>
+          <p className="text-sm text-gray-400">
+            © 2026 BharatBhumi
+          </p>
+        </div>
+      </footer>
+    </main>
   );
 }
      
