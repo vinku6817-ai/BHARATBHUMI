@@ -247,5 +247,10 @@ export default function HomePage() {
         </div>
       </footer>
     </main>
+<img
+  src="/bharatbhumi-logo.png"
+  alt="BharatBhumi"
+  className="w-40 h-auto"
+/>
   );
 }
