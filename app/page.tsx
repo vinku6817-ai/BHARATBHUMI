@@ -2,256 +2,338 @@ import Link from "next/link";
 
 export default function HomePage() {
   return (
-    <main>
-      <nav className="navbar">
-        <div className="container nav-inner">
-          <div className="brand">
-            🌾 Bharat<span>Bhumi</span>
-          </div>
+    <main className="min-h-screen bg-white">
 
-          <div className="nav-links">
-            <a href="#how-it-works">How it works</a>
-            <a href="#why">Why BharatBhumi</a>
-            <Link href="/explore" className="nav-button">
+      {/* NAVBAR */}
+      <nav className="border-b bg-white">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+
+          <Link href="/" className="flex items-center">
+            <img
+              src="/bharatbhumi-logo.png"
+              alt="BharatBhumi"
+              className="h-14 w-auto object-contain"
+            />
+          </Link>
+
+          <div className="flex items-center gap-6">
+            <a href="#how-it-works" className="text-gray-700">
+              How It Works
+            </a>
+
+            <Link
+              href="/explore"
+              className="rounded-lg bg-green-700 px-5 py-3 font-semibold text-white"
+            >
               Explore Mandas
             </Link>
           </div>
+
         </div>
       </nav>
 
-      <section className="hero">
-        <div className="container hero-grid">
-          <div className="hero-content">
-            <div className="eyebrow">
-              🌱 A new way to connect with your farm
-            </div>
+      {/* HERO */}
+      <section className="bg-green-50">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 md:grid-cols-2 md:items-center">
 
-            <h1>
+          <div>
+            <p className="mb-4 font-semibold uppercase tracking-wide text-green-700">
+              Geo-Mapped Micro Farming
+            </p>
+
+            <h1 className="text-5xl font-bold leading-tight text-gray-900">
               Your Farm.
               <br />
               Your Food.
               <br />
-              <span>Our Responsibility.</span>
+              <span className="text-green-700">
+                Our Responsibility.
+              </span>
             </h1>
 
-            <p>
-              Subscribe to your own geo-mapped micro-plot, called a Manda.
-              Local farmers cultivate it responsibly while BharatBhumi manages
-              the journey from farm to you.
+            <p className="mt-6 max-w-xl text-lg leading-8 text-gray-600">
+              BharatBhumi connects you with a geo-mapped micro-plot
+              called a Manda. Choose your farm, select your crop,
+              and let our local farmers take care of cultivation.
             </p>
 
-            <div className="hero-actions">
-              <Link href="/explore" className="primary-button">
+            <div className="mt-8 flex flex-wrap gap-4">
+
+              <Link
+                href="/explore"
+                className="rounded-lg bg-green-700 px-6 py-3 font-semibold text-white"
+              >
                 Explore Available Mandas →
               </Link>
 
-              <a href="#how-it-works" className="secondary-button">
-                How it works
+              <a
+                href="#how-it-works"
+                className="rounded-lg border border-green-700 px-6 py-3 font-semibold text-green-700"
+              >
+                How It Works
               </a>
-            </div>
 
-            <div className="trust-row">
-              <div>
-                <strong>250 m²</strong>
-                <span>Per Manda</span>
-              </div>
-
-              <div>
-                <strong>6 Months</strong>
-                <span>Farm Cycle</span>
-              </div>
-
-              <div>
-                <strong>₹5,100</strong>
-                <span>Subscription</span>
-              </div>
             </div>
           </div>
 
-          <div className="hero-farm">
-            <div className="farm-card">
-              <div className="farm-top">
-                <span>LIVE FARM</span>
-                <span className="live-dot">● Available</span>
-              </div>
+          {/* FARM CARD */}
+          <div className="rounded-2xl bg-white p-6 shadow-xl">
 
-              <div className="farm-map">
-                <div className="map-label">BHARATBHUMI FARM</div>
+            <div className="mb-5 flex items-center justify-between">
+              <h2 className="text-xl font-bold text-gray-900">
+                Your Manda
+              </h2>
 
-                {Array.from({ length: 16 }).map((_, index) => (
-                  <div
-                    className="mini-manda"
-                    key={index}
-                  >
-                    <span>{index + 1}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="farm-bottom">
-                <div>
-                  <small>Farm</small>
-                  <strong>Lucknow, Uttar Pradesh</strong>
-                </div>
-
-                <div>
-                  <small>Mandas</small>
-                  <strong>16 available</strong>
-                </div>
-              </div>
+              <span className="rounded-full bg-green-100 px-3 py-1 text-sm font-semibold text-green-700">
+                Available
+              </span>
             </div>
+
+            <div className="grid grid-cols-4 gap-2 rounded-xl bg-green-50 p-4">
+
+              {Array.from({ length: 16 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="flex aspect-square items-center justify-center rounded-md border border-green-200 bg-green-100 text-sm font-semibold text-green-700"
+                >
+                  {index + 1}
+                </div>
+              ))}
+
+            </div>
+
+            <div className="mt-5 grid grid-cols-2 gap-4">
+
+              <div>
+                <p className="text-sm text-gray-500">
+                  Location
+                </p>
+
+                <p className="font-semibold text-gray-900">
+                  Lucknow, UP
+                </p>
+              </div>
+
+              <div>
+                <p className="text-sm text-gray-500">
+                  Area
+                </p>
+
+                <p className="font-semibold text-gray-900">
+                  250 sq.m
+                </p>
+              </div>
+
+              <div>
+                <p className="text-sm text-gray-500">
+                  Farm Cycle
+                </p>
+
+                <p className="font-semibold text-gray-900">
+                  6 Months
+                </p>
+              </div>
+
+              <div>
+                <p className="text-sm text-gray-500">
+                  Subscription
+                </p>
+
+                <p className="font-semibold text-green-700">
+                  ₹5,100
+                </p>
+              </div>
+
+            </div>
+
           </div>
+
         </div>
       </section>
 
-      <section className="stats-section">
-        <div className="container stats-grid">
-          <div>
-            <strong>01</strong>
-            <p>Choose your Manda</p>
-          </div>
+      {/* HOW IT WORKS */}
+      <section id="how-it-works" className="bg-white py-20">
 
-          <div>
-            <strong>02</strong>
-            <p>Select your crop</p>
-          </div>
+        <div className="mx-auto max-w-7xl px-6">
 
-          <div>
-            <strong>03</strong>
-            <p>Farmer cultivates it</p>
-          </div>
+          <div className="mx-auto max-w-2xl text-center">
 
-          <div>
-            <strong>04</strong>
-            <p>Receive your produce</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="how-it-works" className="section">
-        <div className="container">
-          <div className="section-heading">
-            <span>HOW IT WORKS</span>
-            <h2>Farming made personal.</h2>
-            <p>
-              You don't need to own farmland to have a connection with one.
+            <p className="font-semibold uppercase tracking-wide text-green-700">
+              How It Works
             </p>
-          </div>
 
-          <div className="steps-grid">
-            <div className="step-card">
-              <div className="step-number">01</div>
-              <h3>Choose your Manda</h3>
-              <p>
-                Explore geo-mapped micro-plots and select the farm space you
-                want to subscribe to.
-              </p>
-            </div>
-
-            <div className="step-card">
-              <div className="step-number">02</div>
-              <h3>Choose your crop</h3>
-              <p>
-                Select from crops suitable for the season and your farming
-                cycle.
-              </p>
-            </div>
-
-            <div className="step-card">
-              <div className="step-number">03</div>
-              <h3>We manage the farm</h3>
-              <p>
-                Our local farming partners cultivate and maintain your Manda.
-              </p>
-            </div>
-
-            <div className="step-card">
-              <div className="step-number">04</div>
-              <h3>Stay connected</h3>
-              <p>
-                Track your farm journey and receive your produce through the
-                BharatBhumi system.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="why" className="why-section">
-        <div className="container why-grid">
-          <div>
-            <span className="section-tag">WHY BHARATBHUMI</span>
-
-            <h2>
-              From a distant city to a farm you can call yours.
+            <h2 className="mt-3 text-4xl font-bold text-gray-900">
+              Farming made personal.
             </h2>
 
-            <p>
-              BharatBhumi bridges the gap between urban consumers and
-              agricultural land by turning farmland into accessible,
-              geo-mapped micro-plots.
+            <p className="mt-4 text-gray-600">
+              You don't need to own a large farm to have a
+              connection with one.
+            </p>
+
+          </div>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-4">
+
+            <div className="rounded-xl border p-6">
+              <div className="text-3xl">📍</div>
+              <h3 className="mt-4 text-xl font-bold">
+                Choose your Manda
+              </h3>
+              <p className="mt-2 text-gray-600">
+                Select your geo-mapped micro-plot.
+              </p>
+            </div>
+
+            <div className="rounded-xl border p-6">
+              <div className="text-3xl">🌱</div>
+              <h3 className="mt-4 text-xl font-bold">
+                Choose your crop
+              </h3>
+              <p className="mt-2 text-gray-600">
+                Select the crop you want to cultivate.
+              </p>
+            </div>
+
+            <div className="rounded-xl border p-6">
+              <div className="text-3xl">👨‍🌾</div>
+              <h3 className="mt-4 text-xl font-bold">
+                Farmer cultivates
+              </h3>
+              <p className="mt-2 text-gray-600">
+                Local farmers manage your Manda.
+              </p>
+            </div>
+
+            <div className="rounded-xl border p-6">
+              <div className="text-3xl">📦</div>
+              <h3 className="mt-4 text-xl font-bold">
+                Receive your produce
+              </h3>
+              <p className="mt-2 text-gray-600">
+                Stay connected with your farm journey.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* WHY BHARATBHUMI */}
+      <section className="bg-gray-50 py-20">
+
+        <div className="mx-auto max-w-7xl px-6">
+
+          <div className="grid gap-12 md:grid-cols-2 md:items-center">
+
+            <div>
+
+              <p className="font-semibold uppercase tracking-wide text-green-700">
+                Why BharatBhumi
+              </p>
+
+              <h2 className="mt-3 text-4xl font-bold text-gray-900">
+                From a distant city to a farm you can call yours.
+              </h2>
+
+              <p className="mt-6 text-lg leading-8 text-gray-600">
+                BharatBhumi bridges the gap between urban consumers
+                and farmland through geo-mapped micro-plots and
+                responsible local farming.
+              </p>
+
+            </div>
+
+            <div className="space-y-5">
+
+              <div className="rounded-xl bg-white p-6 shadow-sm">
+                <h3 className="font-bold text-gray-900">
+                  📍 Geo-Mapped Mandas
+                </h3>
+
+                <p className="mt-2 text-gray-600">
+                  Know exactly where your farm is located.
+                </p>
+              </div>
+
+              <div className="rounded-xl bg-white p-6 shadow-sm">
+                <h3 className="font-bold text-gray-900">
+                  🌱 Responsible Farming
+                </h3>
+
+                <p className="mt-2 text-gray-600">
+                  Local farmers manage cultivation on your behalf.
+                </p>
+              </div>
+
+              <div className="rounded-xl bg-white p-6 shadow-sm">
+                <h3 className="font-bold text-gray-900">
+                  🌾 Farm-to-Consumer
+                </h3>
+
+                <p className="mt-2 text-gray-600">
+                  Connect directly with the journey of your food.
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* CTA */}
+      <section className="bg-green-700 py-20 text-center text-white">
+
+        <div className="mx-auto max-w-3xl px-6">
+
+          <h2 className="text-4xl font-bold">
+            Start with your own Manda.
+          </h2>
+
+          <p className="mt-4 text-lg text-green-50">
+            Choose your plot, choose your crop, and let
+            BharatBhumi take responsibility.
+          </p>
+
+          <Link
+            href="/explore"
+            className="mt-8 inline-block rounded-lg bg-white px-7 py-3 font-bold text-green-700"
+          >
+            Explore Mandas →
+          </Link>
+
+        </div>
+
+      </section>
+
+      {/* FOOTER */}
+      <footer className="bg-gray-900 py-8 text-white">
+
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 md:flex-row">
+
+          <div>
+            <p className="font-bold">
+              🌾 BharatBhumi
+            </p>
+
+            <p className="text-sm text-gray-400">
+              Your Farm. Your Food. Our Responsibility.
             </p>
           </div>
 
-          <div className="feature-list">
-            <div>
-              <span>📍</span>
-              <div>
-                <h3>Geo-mapped Mandas</h3>
-                <p>Know exactly where your farm is located.</p>
-              </div>
-            </div>
-
-            <div>
-              <span>🌱</span>
-              <div>
-                <h3>Responsible cultivation</h3>
-                <p>Local farmers manage cultivation on your behalf.</p>
-              </div>
-            </div>
-
-            <div>
-              <span>📦</span>
-              <div>
-                <h3>Farm-to-consumer inventory</h3>
-                <p>Produce can be planned, collected and distributed through our inventory model.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-section">
-        <div className="container cta">
-          <span>YOUR FARM IS WAITING</span>
-          <h2>Start with your own Manda.</h2>
-          <p>
-            Choose your plot, choose your crop, and let BharatBhumi take
-            responsibility for the journey.
+          <p className="text-sm text-gray-400">
+            © 2026 BharatBhumi
           </p>
 
-          <Link href="/explore" className="primary-button">
-            Explore Mandas →
-          </Link>
         </div>
-      </section>
 
-      <footer>
-        <div className="container footer-inner">
-          <div>
-            <strong>🌾 BharatBhumi</strong>
-            <p>Your Farm. Your Food. Our Responsibility.</p>
-          <div className="flex items-center">
-  <img
-    src="/bharatbhumi-logo.png"
-    alt="BharatBhumi"
-    className="h-12 w-auto object-contain"
-  />
-</div>
-
-          <p>© 2026 BharatBhumi</p>
-        </div>
       </footer>
+
     </main>
   );
 }
