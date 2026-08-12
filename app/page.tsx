@@ -707,12 +707,12 @@ export default function HomePage() {
         </div>
       </section>
       {/* ================= FOOTER ================= */}
-      <footer className="bg-off white-950 px-5 py-10 text-white">
+      <footer className="bg-white-950 px-5 py-10 text-white">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-10 md:grid-cols-3">
             <div>
               <div className="flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-green-700 text-2xl">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white-700 text-2xl">
                   <img
   src="/bharatbhumi-logo.png"
   alt="BharatBhumi"
