@@ -643,4 +643,6 @@ export default function ExplorePage() {
 
                 <button
                   onClick={() => setSelectedManda(null)}
+  );
+}
      
